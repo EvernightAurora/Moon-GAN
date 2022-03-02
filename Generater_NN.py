@@ -3,6 +3,8 @@ import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import Model
 import cv2
+import utils
+from matplotlib import pyplot as plt
 
 
 def reuse_block(input, in_layers):
@@ -58,11 +60,11 @@ def generater_jnet():
 if __name__ == '__main__':
     mod = generater_jnet()
     mod.summary()
-    rd = tf.random.normal([1, 100])
+    rd = tf.random.normal([16, 100])
     gen = mod(rd, training=False)
     gen = gen.numpy()
-    cv2.imshow('hi', (gen[0] + 1) * 128)
-    cv2.waitKey(0)
+    utils.plot_16_image(gen)
+    plt.show()
     print('hi')
 
 
